@@ -1,14 +1,17 @@
-class Solution {
-public:
-    int climbStairs(int n) {
-        if (n < 3) return n;
-        int first = 1;
-        int second = 2;
-        for (int i = 2; i < n; i++) {
-            int third = first + second;
-            first = second;
-            second = third;
-        }
-        return second;
-    }
-};
+java.lang.RuntimeException: 
+  at android.app.ActivityThread.handleReceiver (ActivityThread.java:3582)
+  at android.app.ActivityThread.access$1300 (ActivityThread.java:213)
+  at android.app.ActivityThread$H.handleMessage (ActivityThread.java:1818)
+  at android.os.Handler.dispatchMessage (Handler.java:106)
+  at android.os.Looper.loop (Looper.java:193)
+  at android.app.ActivityThread.main (ActivityThread.java:6923)
+  at java.lang.reflect.Method.invoke (Native Method)
+  at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run (RuntimeInit.java:493)
+  at com.android.internal.os.ZygoteInit.main (ZygoteInit.java:870)
+Caused by: java.lang.ClassNotFoundException: 
+  at dalvik.system.BaseDexClassLoader.findClass (BaseDexClassLoader.java:134)
+  at java.lang.ClassLoader.loadClass (ClassLoader.java:379)
+  at java.lang.ClassLoader.loadClass (ClassLoader.java:312)
+  at android.app.AppComponentFactory.instantiateReceiver (AppComponentFactory.java:84)
+  at androidx.core.app.CoreComponentFactory.instantiateReceiver (CoreComponentFactory.java:60)
+  at android.app.ActivityThread.handleReceiver (ActivityThread.java:3575)

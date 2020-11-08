@@ -75,34 +75,26 @@
 
 // @lc code=start
 class Solution {
-    bool isValidNum(vector<vector<char>>& board, int x, int y, int num) {
-        for (int i = 0; i < board.size(); i++) {
-            if (board[x][i] == '0'+num) return false;
-            if (board[i][y] == '0'+num) return false;
-            if (board[i/3+3*(x/3)][i%3+3*(y/3)] == '0'+num) return false;
-        }
-        return true;
-    }
-
-    bool backtrace(vector<vector<char>>& board, int n) {
-        int size = board.size();
-        while (n < size*size && board[n/size][n%size] != '.')
-            ++n;
-        if (n >= size*size) return true;
-
-        for (int j = 1; j <= size; j++) {
-            if (isValidNum(board, n/size, n%size, j)) {
-                board[n/size][n%size] = '0' + j;
-                if (backtrace(board, n+1)) return true;
-                board[n/size][n%size] = '.';
-            }
-        }
-        return false;
-    }
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
-        if (board.size() < 1) return true;
-        return backtrace(board, 0);
+        int n = board.size();
+        if (n < 1) return true;
+        unordered_map<int, int> mp;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] != '.') {
+                    int val1 = 100+i*10+(board[i][j] - '0');
+                    int val2 = 200+j*10+(board[i][j] - '0');
+                    int val3 = 300+(i/3*3+j/3)*10+(board[i][j] - '0');
+                    if (mp[val1] == 1|| mp[val2] == 1 || mp[val3] == 1)
+                        return false;
+                    mp[100+i*10+(board[i][j] - '0')] = 1;
+                    mp[200+j*10+(board[i][j] - '0')] = 1;
+                    mp[300+(i/3*3+j/3)*10+(board[i][j] - '0')] = 1;
+                }
+            }
+        }
+        return true;
     }
 };
 // @lc code=end
